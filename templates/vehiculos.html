@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vehículos - Automotora Becker
+{% endblock %}
+
+{% block content %}
+
+<!-- Barra de filtros-->
+<div class="container my-4 barra-filtros">
+    <h2 class="text-white bg-dark p-2 rounded">Filtrar Vehículos</h2>
+    <form method="GET" action="/vehiculos">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-3">
+                <label for="marca" class="form-label">Marca</label>
+                <select class="form-select" id="marca" name="marca">
+                    <option value="">Seleccionar</option>
+                    <option value="Toyota">Toyota</option>
+                    <option value="Honda">Honda</option>
+                    <option value="Mazda">Mazda</option>
+                    <option value="Nissan">Nissan</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="modelo" class="form-label">Modelo</label>
+                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ej. Corolla">
+            </div>
+
+            <div class="col-md-3">
+                <label for="precio_min" class="form-label">Precio Mínimo</label>
+                <input type="number" class="form-control" id="precio_min" name="precio_min" placeholder="Ej. 5000">
+            </div>
+
+            <div class="col-md-3">
+                <label for="precio_max" class="form-label">Precio Máximo</label>
+                <input type="number" class="form-control" id="precio_max" name="precio_max" placeholder="Ej. 20000">
+            </div>
+
+            <div class="col-md-12 text-end">
+                <button type="submit" class="btn btn-primary mt-3">Aplicar Filtros</button>
+                <a href="/vehiculos" class="btn btn-secondary mt-3">Limpiar</a>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- Listado de vehículos -->
+<div class="container">
+    <div class="row">
+        {% for auto in autos %}
+        <div class="col-12 col-md-4 mb-4 card-img-aum">
+            <div class="card h-100 shadow">
+                <img src="{{ url_for('static', filename=auto.img) if auto.img else url_for('static', filename='img/default.jpg') }}" class="card-img-top" alt="{{ auto.marca }} {{ auto.modelo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
+                    <p class="card-text">{{ auto.descripcion }}</p>
+                    <a href="/vehiculo/{{ auto.patente }}" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Automotora Becker{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/logo2.png') }}" alt="Logo" style="width: 180px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ url_for('index') }}#scrollspyHeading3">¿Quiénes Somos?</a></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('index') }}#scrollspyHeading4">Financiamiento</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="{{ url_for('index') }}#scrollspyHeading5">Servicio de transferencias</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_page == 'vehiculos' %}active{% endif %}" href="{{ url_for('vehiculos') }}">Catálogo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if active_page == 'contacto' %}active{% endif %}" href="{{ url_for('contacto') }}">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Script para Scroll Suave -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Si la URL tiene un hash (#), hacer scroll suave
+        if (window.location.hash) {
+            var target = document.querySelector(window.location.hash);
+            if (target) {
+                setTimeout(() => {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: "smooth" });
+                }, 500);
+            }
+        }
+    });
+    </script>
+    
+
+<!-- Contenido principal -->
+<main class="container-fluid">
+    {% block content %}
+    {% endblock %}
+</main>
+<!-- Footer -->
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <!-- Columna izquierda -->
+            <div class="col-md-6">
+                <h5>Contáctanos</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-envelope"></i> 
+                        <a href="mailto:ejemplo@correo.com" class="text-white text-decoration-none">Contacto@automotorabecker.cl
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <i class="fab fa-whatsapp"></i> 
+                        <a href="https://wa.me/56968335812?text=Hola,%20quiero%20más%20información%20sobre%20los%20vehículos!" target="_blank" class="text-white text-decoration-none">
+                            +56 9 68335812
+                        </a>
+                        
+                    </li>
+                    <li class="mb-2">
+                        <i class="fab fa-instagram"></i> 
+                        <a href="https://www.instagram.com/automotorabecker/" class="text-white text-decoration-none">@AutomotoraBecker
+                        </a>
+                    </li>
+                    <li>
+                        <i class="fab fa-facebook"></i> 
+                        <a href="https://www.facebook.com/share/19oGdcjwni/?mibextid=wwXIfr" class="text-white text-decoration-none">AutomotoraBecker</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Columna derecha -->
+            <div class="col-md-6">
+                <h5>Encuéntranos</h5>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3268.605893671197!2d-71.23646838801291!3d-34.991535172704396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x966457d9ba8528b5%3A0xf378bc77599b77f2!2sAutomotora%20Becker!5e0!3m2!1ses-419!2scl!4v1737474574108!5m2!1ses-419!2scl" 
+                    width="100%" 
+                    height="200" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            
+        </div>
+    </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

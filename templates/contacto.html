@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inicio - Automotora Becker
+{% endblock %}
+
+{% block content %}
+    <!-- Formulario de contacto -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Contáctanos</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="name" placeholder="Ingresa tu nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="email" placeholder="nombre@correo.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Asunto</label>
+                        <input type="text" class="form-control" id="subject" placeholder="Motivo del contacto" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="attachment" class="form-label mt-3">Adjuntar archivo</label>
+                        <input type="file" class="form-control" id="attachment" accept=".jpg,.jpeg,.png,.pdf,.doc,.docx">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="message" rows="5" placeholder="Escribe tu mensaje" required></textarea>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

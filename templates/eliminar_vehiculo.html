@@ -1,0 +1,18 @@
+{% extends "dash.html" %}
+
+{% block title %}
+Administrador - Automotora Becker
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Eliminar Vehículo</h2>
+    <form action="{{ url_for('eliminar_vehiculo') }}" method="POST">
+        <div class="mb-3">
+            <label for="patente" class="form-label">Patente del Vehículo</label>
+            <input type="text" class="form-control" id="patente" name="patente" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+    </form>
+</div>
+{% endblock %}

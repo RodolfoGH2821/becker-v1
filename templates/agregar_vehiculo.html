@@ -1,0 +1,41 @@
+{% extends "dash.html" %}
+
+{% block title %}
+Administrador - Automotora Becker
+{% endblock %}
+
+{%block content%}
+<form method="POST" action="/admin/agregar_vehiculo" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="patente" class="form-label">Patente</label>
+        <input type="text" class="form-control" id="patente" name="patente" placeholder="Ej. ABC123" required>
+    </div>
+    <div class="mb-3">
+        <label for="marca" class="form-label">Marca</label>
+        <input type="text" class="form-control" id="marca" name="marca" placeholder="Ej. Toyota" required>
+    </div>
+    <div class="mb-3">
+        <label for="modelo" class="form-label">Modelo</label>
+        <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ej. Corolla" required>
+    </div>
+    <div class="mb-3">
+        <label for="precio" class="form-label">Precio</label>
+        <input type="number" class="form-control" id="precio" name="precio" placeholder="Ej. 10000000" required>
+    </div>
+    <div class="mb-3">
+        <label for="año" class="form-label">Año</label>
+        <input type="number" class="form-control" id="año" name="año" placeholder="Ej. 2022" required>
+    </div>
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="3" required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="imagenes" class="form-label">Imágenes</label>
+        <input type="file" class="form-control" id="imagenes" name="imagenes" accept="image/*" multiple required>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+
+
+{% endblock %}

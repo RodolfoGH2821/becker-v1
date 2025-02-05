@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}
+Inicio - Automotora Becker
+{% endblock %}
+
+{% block content %}
+
+<!-- Carrusel -->
+<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-interval="200" data-bs-touch="false">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{{ url_for('static', filename='img/carrusel1.jpeg') }}" class="d-block w-100" alt="Imagen 1">
+            <a href="#" class="btn btn-secondary overlay-button" role="button">Compra Con Nosotros</a>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/carrusel2.jpeg') }}" class="d-block w-100" alt="Imagen 2">
+            <a href="#" class="btn btn-secondary overlay-button" role="button">Véndenos tu Vehículo</a>
+        </div>
+        <div class="carousel-item">
+            <img src="{{ url_for('static', filename='img/carrusel3.jpeg') }}" class="d-block w-100" alt="Imagen 3">
+
+            <a href="#" class="btn btn-secondary overlay-button" role="button">Contáctanos</a>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Anterior</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Siguiente</span>
+    </button>
+</div>
+<!-- Últimas publicaciones -->
+<div class="container my-4">
+    <div class="row align-items-center bg-dark">
+        <div class="col-12 d-flex justify-content-between">
+            <h2 class="text-white bg-dark py-3 mb-0">Últimas Publicaciones</h2>
+            <button class="btn btn-primary py-0 mb-3 my-3">Ver Más</button>
+        </div>
+    </div>
+    <div class="row">
+        {% for i in range(4) %}
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename='img/carrusel' + loop.index|string + '.jpeg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Título {{ loop.index }}</h5>
+                    <p class="card-text">Breve descripción del contenido de la tarjeta.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Maquetado elegante y atractivo con Bootstrap -->
+<div class="container mt-5">
+
+    <!-- Sección: ¿Quiénes Somos? -->
+    <section id="scrollspyHeading3" class="mb-5 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="text-center">
+        <h2 class="display-4 mb-4">¿Quiénes Somos?</h2>
+        <p class="lead text-muted">
+          Somos una empresa familiar con más de diez años de trayectoria en el rubro automotriz. Nos destacamos por ofrecer a nuestros clientes la mejor combinación de precio y calidad, brindando opciones confiables y accesibles. Nuestra experiencia y compromiso nos permiten garantizar un servicio que se ajusta a las necesidades del mercado, siempre priorizando la satisfacción y confianza de quienes nos eligen.
+        </p>
+      </div>
+  
+      <div class="row mt-5">
+        <!-- Tarjeta de Nuestra Misión -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-0 shadow">
+            <div class="card-body">
+              <h3 class="card-title text-primary">Nuestra Misión</h3>
+              <p class="card-text text-secondary">
+                Brindar a nuestros clientes soluciones automotrices accesibles y de calidad, ofreciendo vehículos y servicios que se ajusten a sus necesidades. Nos comprometemos a garantizar confianza, transparencia y una experiencia de compra satisfactoria, respaldada por nuestra trayectoria y valores familiares.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Tarjeta de Nuestra Visión -->
+        <div class="col-md-6 mb-4">
+          <div class="card border-0 shadow">
+            <div class="card-body">
+              <h3 class="card-title text-primary">Nuestra Visión</h3>
+              <p class="card-text text-secondary">
+                Ser una empresa líder en el sector automotriz, reconocida por nuestra excelencia en servicio, compromiso con la calidad y capacidad de ofrecer las mejores opciones del mercado. Buscamos consolidarnos como la primera elección de nuestros clientes, expandiendo nuestra oferta y manteniendo nuestra esencia familiar y cercana.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <!-- Sección: Financiamiento Automotriz -->
+    <section id="scrollspyHeading4" class="mb-5 min-vh-100 d-flex flex-column justify-content-center">
+      <div class="text-center">
+        <h2 class="display-5 mb-4">¿Necesitas financiamiento automotriz?</h2>
+        <p class="lead text-muted">
+          En Automotora Becker trabajamos con distintas entidades financieras, buscando siempre la opción más conveniente para ti.
+        </p>
+      </div>
+  
+      <!-- Lista de Requisitos -->
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-8">
+          <h4 class="text-center text-secondary mb-3">Requisitos:</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Pie inicial desde 20%</li>
+            <li class="list-group-item">No tener antecedentes comerciales negativos</li>
+            <li class="list-group-item">Plazo hasta 60 cuotas</li>
+          </ul>
+        </div>
+      </div>
+  
+      <!-- Logos de entidades financieras -->
+      <div class="row mt-5 justify-content-center">
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/autofidem.jpg" alt="Autofidem" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/global.jpg" alt="Global" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/unidad.jpg" alt="Unidad" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/falabella.jpg" alt="Falabella" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </section>
+    
+
+    <section id="scrollspyHeading5" class="mb-5 min-vh-100 d-flex flex-column justify-content-center">
+        <div class="text-center">
+            <h1 class="display-4 mb-4">transferencias a Terceros.</h1>
+            <p class="lead text-muted">
+                Transfiere tu vehículo con seguridad.
+            </p>
+            <p class="lead text-muted">
+                Automotora Becker ofrece el servicio de transferencia digital, gestionando el proceso de inicio a fin y desde la comodidad de tu hogar. 
+            </p>
+            <p class="lead text-muted">
+                Proceso 100% seguro con sistema blindado contra falsificadores para evitar estafas.
+            </p>
+
+        </div>
+
+    </section>
+  </div>
+  
+
+{% endblock %}
+
+
+
+

@@ -1,0 +1,31 @@
+{% extends "dash.html" %}
+
+{% block title %}Listar Vehículos{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Lista de Vehículos</h2>
+    <div class="row">
+        {% for vehiculo in vehiculos %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if vehiculo.img %}
+                <img src="{{ url_for('static', filename=vehiculo.img) }}" class="card-img-top" alt="{{ vehiculo.marca }}">
+                {% else %}
+                <img src="{{ url_for('static', filename='img/default.jpg') }}" class="card-img-top" alt="Sin Imagen">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ vehiculo.marca }} {{ vehiculo.modelo }}</h5>
+                    <p class="card-text">Precio: ${{ vehiculo.precio }}</p>
+                    <a href="{{ url_for('editar_vehiculo', patente=vehiculo.patente) }}" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Editar
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+

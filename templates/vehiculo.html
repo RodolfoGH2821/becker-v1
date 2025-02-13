@@ -15,9 +15,14 @@
                 <div class="carousel-inner rounded-3">
                     {% for img in imagenes %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}" data-bs-slide-to="{{ loop.index0 }}">
-                        <img src="{{ url_for('static', filename=img.ruta)}}" 
-                             class="d-block w-100 zoomable" 
-                             alt="{{ vehiculo.marca }} {{ vehiculo.modelo }} - Imagen {{ loop.index }}">
+                        <img 
+                            src="{{ url_for('static', filename=img.ruta)}}" 
+                            class="d-block w-100 zoomable" 
+                            alt="{{ vehiculo.marca }} {{ vehiculo.modelo }} - Imagen {{ loop.index }}"
+                            data-bs-toggle="modal" 
+                            data-bs-target="#zoomModal" 
+                            data-fullsize="{{ url_for('static', filename=img.ruta) }}"
+                        >
                     </div>
                     {% endfor %}
                 </div>
@@ -30,6 +35,27 @@
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Siguiente</span>
                 </button>
+            </div>
+            
+            <!-- Modal Bootstrap -->
+            <div class="modal fade" id="zoomModal" tabindex="-1" aria-labelledby="zoomModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content bg-dark text-white">
+                        <div class="modal-header border-0">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body text-center p-0">
+                            <!-- Imagen donde se aplicará MediumZoom -->
+                            <img 
+                                id="modalZoomImage" 
+                                class="zoomable-modal"
+                                src="" 
+                                alt="Imagen ampliada" 
+                                style="width: 100%; height: auto; max-height: 90vh; object-fit: contain;"
+                            >
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Miniaturas -->
@@ -78,7 +104,7 @@
                     </li>
                     <li class="list-group-item">
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="fw-500">Transmición:</span>
+                            <span class="fw-500">Transmisión:</span>
                         </div>
                         <p class="text-muted mb-0">{{ vehiculo.transmicion }}</p>
                     </li>
@@ -87,7 +113,8 @@
                             <span class="fw-500">Dirección:</span>
                         </div>
                         <p class="text-muted mb-0">{{ vehiculo.direccion}}</p>
-                    </li>                    <li class="list-group-item">
+                    </li>
+                    <li class="list-group-item">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="fw-500">Combustible:</span>
                         </div>
@@ -117,44 +144,40 @@
     </div>
 </div>
 
+<!-- MediumZoom (versión CDN) -->
 <script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.6/dist/medium-zoom.min.js"></script>
+
 <script>
-
-    // Zoom mejorado
-    let zoomInstance;
-    
-    const initZoom = () => {
-        zoomInstance?.detach();
-        zoomInstance = mediumZoom('.zoomable', {
-            margin: 40,
-            background: 'rgba(0, 0, 0, 0.92)',
-            scrollOffset: 100
-        });
-    };
-    
-    // Manejo de eventos
-    document.addEventListener('DOMContentLoaded', initZoom);
-    
-    document.getElementById('carruselVehiculo').addEventListener('slid.bs.carousel', (e) => {
-        initZoom();
-        updateActiveThumbnail();
+  // 1. Encuentra todas las imágenes del carrusel que dispararán el modal al hacer clic
+  const zoomableImages = document.querySelectorAll('.carousel-item img.zoomable');
+  
+  zoomableImages.forEach(img => {
+    img.addEventListener('click', () => {
+      // Pasa la URL en data-fullsize al src de la imagen del modal
+      const fullsizeUrl = img.getAttribute('data-fullsize');
+      document.getElementById('modalZoomImage').src = fullsizeUrl;
     });
-    
-    const updateActiveThumbnail = () => {
-        const activeIndex = document.querySelector('.carousel-item.active').dataset.bsSlideTo;
-        document.querySelectorAll('.thumbnail-item').forEach(item => {
-            item.classList.remove('active');
-            if(item.dataset.bsSlideTo === activeIndex) item.classList.add('active');
-        });
-    };
-    
-    document.querySelectorAll('.thumbnail-item').forEach(item => {
-        item.addEventListener('click', function() {
-            document.querySelectorAll('.thumbnail-item').forEach(i => i.classList.remove('active'));
-            this.classList.add('active');
-        });
+  });
+
+  // 2. Inicializa / Destruye MediumZoom dentro del modal
+  let zoomInstance;
+  const myModal = document.getElementById('zoomModal');
+
+  // Cuando el modal se termina de abrir
+  myModal.addEventListener('shown.bs.modal', () => {
+    zoomInstance = mediumZoom('#modalZoomImage', {
+      margin: 40,
+      background: 'rgba(0,0,0,0.7)',
+      scrollOffset: 0
     });
+  });
 
-
+  // Cuando el modal se cierra
+  myModal.addEventListener('hidden.bs.modal', () => {
+    if (zoomInstance) {
+      zoomInstance.detach();
+      zoomInstance = null;
+    }
+  });
 </script>
 {% endblock %}

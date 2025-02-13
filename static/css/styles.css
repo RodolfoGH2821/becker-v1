@@ -83,56 +83,6 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
-/* Título de la barra */
-.barra-filtros h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #343a40; /* Color oscuro */
-}
-
-/* Labels de los filtros */
-.barra-filtros .form-label {
-    font-weight: bold;
-    color: #495057; /* Color gris oscuro */
-}
-
-/* Inputs y selects */
-.barra-filtros .form-control,
-.barra-filtros .form-select {
-    border-radius: 5px; /* Esquinas redondeadas */
-    border: 1px solid #ced4da; /* Borde gris claro */
-}
-
-/* Inputs al enfocar */
-.barra-filtros .form-control:focus,
-.barra-filtros .form-select:focus {
-    border-color: #007bff; /* Azul de Bootstrap */
-    box-shadow: 0 0 4px rgba(0, 123, 255, 0.5); /* Resaltado suave */
-}
-
-/* Botones */
-.barra-filtros .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    transition: background-color 0.3s ease;
-}
-
-.barra-filtros .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
-}
-
-.barra-filtros .btn-secondary {
-    background-color: #6c757d;
-    border-color: #6c757d;
-    transition: background-color 0.3s ease;
-}
-
-.barra-filtros .btn-secondary:hover {
-    background-color: #5a6268;
-    border-color: #545b62;
-}
-
 .whatsapp-float {
     position: fixed;
     width: 50px;
@@ -215,3 +165,13 @@
 .fw-500 {
     font-weight: 500;
 }
+
+#modalZoomImage {
+    width: 100%;
+    height: auto;
+    /* si quieres asegurarte de no salirte de la pantalla */
+    max-height: 90vh;
+    object-fit: contain;
+  }
+  
+  

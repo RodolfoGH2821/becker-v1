@@ -7,10 +7,10 @@ Inicio - Automotora Becker
 {% block content %}
 
 <!-- Carrusel -->
-<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-interval="200" data-bs-touch="false">
+<div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500" data-bs-touch="true">
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="{{ url_for('static', filename='img/carrusel1.jpeg') }}" class="d-block w-100" alt="Imagen 1">
+            <img src="{{ url_for('static', filename='img/carrusel1.jpg') }}" class="d-block w-100" alt="Imagen 1">
             <a href="#" class="btn btn-secondary overlay-button" role="button">Compra Con Nosotros</a>
         </div>
         <div class="carousel-item">
@@ -32,30 +32,30 @@ Inicio - Automotora Becker
         <span class="visually-hidden">Siguiente</span>
     </button>
 </div>
+
 <!-- Últimas publicaciones -->
 <div class="container my-4">
-    <div class="row align-items-center bg-dark">
-        <div class="col-12 d-flex justify-content-between">
-            <h2 class="text-white bg-dark py-3 mb-0">Últimas Publicaciones</h2>
-            <button class="btn btn-primary py-0 mb-3 my-3">Ver Más</button>
-        </div>
-    </div>
-    <div class="row">
-        {% for i in range(4) %}
-        <div class="col-12 col-md-3 mb-4">
-            <div class="card">
-                <img src="{{ url_for('static', filename='img/carrusel' + loop.index|string + '.jpeg') }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">Título {{ loop.index }}</h5>
-                    <p class="card-text">Breve descripción del contenido de la tarjeta.</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
+  <div class="row align-items-center bg-dark">
+      <div class="col-12 d-flex justify-content-between">
+          <h2 class="text-white bg-dark py-3 mb-0">Últimas Publicaciones</h2>
+          <button class="btn btn-primary py-0 mb-3 my-3">Ver Más</button>
+      </div>
+  </div>
+  <div class="row">
+      {% for i in range(4) %}
+      <div class="col-12 col-md-3 mb-4">
+          <div class="card">
+              <img src="{{ url_for('static', filename='img/carrusel' + loop.index|string + '.jpeg') }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                  <h5 class="card-title">Título {{ loop.index }}</h5>
+                  <p class="card-text">Breve descripción del contenido de la tarjeta.</p>
+                  <a href="#" class="btn btn-primary">Ver más</a>
+              </div>
+          </div>
+      </div>
+      {% endfor %}
+  </div>
 </div>
-
 <!-- Maquetado elegante y atractivo con Bootstrap -->
 <div class="container mt-5">
 
@@ -102,7 +102,22 @@ Inicio - Automotora Becker
           En Automotora Becker trabajamos con distintas entidades financieras, buscando siempre la opción más conveniente para ti.
         </p>
       </div>
-  
+      <!-- Logos de entidades financieras -->
+      <div class="row mt-5 justify-content-center">
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/autofidem.jpg" alt="Autofidem" class="img-fluid rounded shadow" style="width: 300px; height: 100px;">
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/global.jpg" alt="Global" class="img-fluid rounded shadow" style="width: 300px; height: 100px;">
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/unidad.jpg" alt="Unidad" class="img-fluid rounded shadow" style="width: 300px; height: 100px;">
+        </div>
+        <div class="col-6 col-md-3 mb-4">
+          <img src="/static/img/Financiamiento/falabella.jpg" alt="Falabella" class="img-fluid rounded shadow" style="width: 300px; height: 100px;">
+        </div>
+      </div>
+
       <!-- Lista de Requisitos -->
       <div class="row justify-content-center mt-4">
         <div class="col-md-8">
@@ -112,22 +127,6 @@ Inicio - Automotora Becker
             <li class="list-group-item">No tener antecedentes comerciales negativos</li>
             <li class="list-group-item">Plazo hasta 60 cuotas</li>
           </ul>
-        </div>
-      </div>
-  
-      <!-- Logos de entidades financieras -->
-      <div class="row mt-5 justify-content-center">
-        <div class="col-6 col-md-3 mb-4">
-          <img src="/static/img/Financiamiento/autofidem.jpg" alt="Autofidem" class="img-fluid rounded shadow">
-        </div>
-        <div class="col-6 col-md-3 mb-4">
-          <img src="/static/img/Financiamiento/global.jpg" alt="Global" class="img-fluid rounded shadow">
-        </div>
-        <div class="col-6 col-md-3 mb-4">
-          <img src="/static/img/Financiamiento/unidad.jpg" alt="Unidad" class="img-fluid rounded shadow">
-        </div>
-        <div class="col-6 col-md-3 mb-4">
-          <img src="/static/img/Financiamiento/falabella.jpg" alt="Falabella" class="img-fluid rounded shadow">
         </div>
       </div>
     </section>

@@ -6,47 +6,28 @@ Vehículos - Automotora Becker
 
 {% block content %}
 
-<!-- Barra de filtros-->
-<div class="container my-4 barra-filtros">
-    <h2 class="text-white bg-dark p-2 rounded">Filtrar Vehículos</h2>
-    <form method="GET" action="/vehiculos">
-        <div class="row g-3 align-items-center">
-            <div class="col-md-3">
-                <label for="marca" class="form-label">Marca</label>
-                <select class="form-select" id="marca" name="marca">
-                    <option value="">Seleccionar</option>
-                    <option value="Toyota">Toyota</option>
-                    <option value="Honda">Honda</option>
-                    <option value="Mazda">Mazda</option>
-                    <option value="Nissan">Nissan</option>
-                </select>
-            </div>
-
-            <div class="col-md-3">
-                <label for="modelo" class="form-label">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name="modelo" placeholder="Ej. Corolla">
-            </div>
-
-            <div class="col-md-3">
-                <label for="precio_min" class="form-label">Precio Mínimo</label>
-                <input type="number" class="form-control" id="precio_min" name="precio_min" placeholder="Ej. 5000">
-            </div>
-
-            <div class="col-md-3">
-                <label for="precio_max" class="form-label">Precio Máximo</label>
-                <input type="number" class="form-control" id="precio_max" name="precio_max" placeholder="Ej. 20000">
-            </div>
-
-            <div class="col-md-12 text-end">
-                <button type="submit" class="btn btn-primary mt-3">Aplicar Filtros</button>
-                <a href="/vehiculos" class="btn btn-secondary mt-3">Limpiar</a>
+<!-- Últimas publicaciones -->
+<div class="container my-4">
+    <div class="row align-items-center bg-dark">
+        <div class="col-12 d-flex justify-content-between">
+            <h2 class="text-white bg-dark py-3 mb-0">Últimos Vendidos</h2>
+        </div>
+    </div>
+    <div class="row">
+        {% for i in range(4) %}
+        <div class="col-12 col-md-3 mb-4">
+            <div class="card">
+                <img src="{{ url_for('static', filename='img/carrusel' + loop.index|string + '.jpeg') }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Título {{ loop.index }}</h5>
+                    <p class="card-text">Breve descripción del contenido de la tarjeta.</p>
+                    <a href="#" class="btn btn-primary">Ver más</a>
+                </div>
             </div>
         </div>
-    </form>
+        {% endfor %}
+    </div>
 </div>
-
-
-
 <!-- Listado de vehículos -->
 <div class="container">
     <div class="row">
@@ -55,8 +36,20 @@ Vehículos - Automotora Becker
             <div class="card h-100 shadow">
                 <img src="{{ url_for('static', filename=auto.img) if auto.img else url_for('static', filename='img/default.jpg') }}" class="card-img-top" alt="{{ auto.marca }} {{ auto.modelo }}">
                 <div class="card-body">
-                    <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }}</h5>
-                    <p class="card-text">{{ auto.descripcion }}</p>
+                    <h5 class="card-title">{{ auto.marca }} {{ auto.modelo }} {{auto.año}}</h5>
+                    <!-- Estado en color según si está Vendido o En Venta -->
+                    <p class="card-text">
+                        {% if auto.estado == 'Vendido' %}
+                            <span style="color: red; font-weight: bold;">{{ auto.estado }}</span>
+                        {% elif auto.estado == 'En Venta' %}
+                            <span style="color: green; font-weight: bold;">{{ auto.estado }}</span>
+                        {% else %}
+                            {{ auto.estado }}
+                        {% endif %}
+                    </p>
+                    <p class="card-text">
+                        <strong>Precio: </strong>{{ auto.precio | miles }}
+                    </p>
                     <a href="/vehiculo/{{ auto.patente }}" class="btn btn-primary">Ver más</a>
                 </div>
             </div>

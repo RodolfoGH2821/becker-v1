@@ -19,6 +19,18 @@ app.config['DEBUG'] = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
+@app.template_filter('miles')
+def miles_filter(value):
+    try:
+        # Convertir a entero y formatear con comas
+        formateado = f"{int(value):,}"
+        # Reemplazar comas por puntos
+        return formateado.replace(",", ".")
+    except:
+        # Si falla (por ej., no es número), regresamos el valor original
+        return value
+
+
 # Instancia de la base de datos
 db = Database()
 
@@ -53,12 +65,21 @@ def index():
 def vehiculos():
     """Muestra la lista de vehículos disponibles."""
     select_query = """
-        SELECT v.patente, v.marca, v.modelo, v.precio, v.descripcion, 
-        (SELECT ruta FROM imagenes WHERE imagenes.patente = v.patente LIMIT 1) AS img
+        SELECT 
+            v.patente, 
+            v.marca, 
+            v.modelo, 
+            v.precio,
+            v.año, 
+            v.estado,
+            v.descripcion,
+            -- Subconsulta para obtener una imagen (si existe)
+            (SELECT ruta FROM imagenes WHERE imagenes.patente = v.patente LIMIT 1) AS img
         FROM vehiculos v
     """
     autos = db.fetch_query(select_query)
     return render_template('vehiculos.html', autos=autos)
+
 
 @app.route('/vehiculo/<string:patente>')
 def vehiculo(patente):
@@ -96,9 +117,15 @@ def guardar_vehiculo():
         precio = request.form.get('precio').strip()
         año = request.form.get('año').strip()
         descripcion = request.form.get('descripcion').strip()
+        transmicion = request.form.get('transmicion').strip()
+        direccion = request.form.get('direccion').strip()
+        combustible = request.form.get('combustible').strip()
+        fecha_adquisicion = request.form.get('fecha_adquisicion').strip()
+        estado = request.form.get('estado').strip()
+        kilometraje = request.form.get('kilometraje').strip()
         imagenes = request.files.getlist('imagenes')
 
-        if not all([patente, marca, modelo, precio, año, descripcion]):
+        if not all([patente, marca, modelo, precio, año, descripcion, transmicion, direccion, combustible,  fecha_adquisicion, estado, kilometraje ]):
             flash("Todos los campos son obligatorios.", "warning")
             return render_template('agregar_vehiculo.html')
 
@@ -108,10 +135,10 @@ def guardar_vehiculo():
 
         try:
             query_vehiculo = """
-                INSERT INTO vehiculos (patente, marca, modelo, precio, año, descripcion)
-                VALUES (%s, %s, %s, %s, %s, %s)
+                INSERT INTO vehiculos (patente, marca, modelo, precio, año, descripcion, transmicion, direccion, combustible, fecha_adquisicion, estado, kilometraje)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s )
             """
-            db.execute_query(query_vehiculo, (patente, marca, modelo, precio, año, descripcion))
+            db.execute_query(query_vehiculo, (patente, marca, modelo, precio, año, descripcion, transmicion, direccion, combustible, fecha_adquisicion, estado, kilometraje))
 
             for imagen in imagenes:
                 if imagen and imagen.filename:
